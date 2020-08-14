@@ -78,7 +78,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
     
-    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+    
         # 先找圖
         try:
             url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q':event.message.text})[2:]}/"
