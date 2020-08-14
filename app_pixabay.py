@@ -25,7 +25,7 @@ handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
 
 @app.route("/")
 def home():
-    return render_template("home_pixijs.html")
+    return render_template("home.html")
 
 
 # 接收 LINE 的資訊
