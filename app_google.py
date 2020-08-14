@@ -80,12 +80,12 @@ def google_isch(event):
         # 找不到圖就告訴我 user_id
         except:
                 msg = event.message.text
-                r = '我看不懂你說什麼'
+                r = '我看不懂你說什麼啦(嘟'
 
                 if '貼圖' in msg:
                     sticker_message = StickerSendMessage(
-                    package_id='1',
-                    sticker_id='1'
+                    package_id=f'{str(random.randint(1, 3))}',
+                    sticker_id=f'{str(random.randint(1, 250))}'
                 )
                     line_bot_api.reply_message(
                         event.reply_token,
