@@ -53,7 +53,10 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=r))
-
+        sticker_message = StickerSendMessage(
+    package_id='1',
+    sticker_id='1'
+)
 
 if __name__ == "__main__":
     app.run()
