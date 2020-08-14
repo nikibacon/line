@@ -6,7 +6,7 @@ from flask import Flask, request, abort, render_template
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage
 
 import configparser
 
@@ -42,38 +42,6 @@ def callback():
         abort(400)
 
     return 'OK'
-
-# # 請 pixabay 幫我們找圖
-# @handler.add(MessageEvent, message=TextMessage)
-# def pixabay_isch(event):
-    
-# # 先找圖
-#         try:
-#             url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q':event.message.text})[2:]}/"
-#             headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
-            
-#             req = urllib.request.Request(url, headers = headers)
-#             conn = urllib.request.urlopen(req)
-            
-#             print('fetch page finish')
-            
-#             pattern = 'img srcset="\S*\s\w*,'
-#             img_list = []
-            
-#             for match in re.finditer(pattern, str(conn.read())):
-#                 img_list.append(match.group()[12:-3])
-                
-#             random_img_url = random.choice(img_list)
-#             print('fetch img url finish')
-#             print(random_img_url)
-            
-#             line_bot_api.reply_message(
-#                 event.reply_token,
-#                 ImageSendMessage(
-#                     original_content_url=random_img_url,
-#                     preview_image_url=random_img_url
-#                 )
-#             )
 
 
 

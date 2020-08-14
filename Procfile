@@ -1,2 +1,2 @@
-web: gunicorn app_pixabay:app --preload
+web: gunicorn app_google:app --preload
 clock: python clock.py
