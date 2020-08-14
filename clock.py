@@ -26,7 +26,7 @@ def scheduled_job():
     print(f'{datetime.datetime.now().ctime()}')
     print('========== APScheduler CRON =========')
 
-    url = "https://line-94bot.herokuapp.com"
+    url = "https://line-94bot.herokuapp.com/"
     conn = urllib.request.urlopen(url)
 
     for key, value in conn.getheaders():
