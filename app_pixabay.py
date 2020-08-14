@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 import os
-from flask import Flask, request, abort
+
+# 增加了 render_template
+from flask import Flask, request, abort, render_template
+
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
@@ -19,6 +22,10 @@ config.read('config.ini')
 
 line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
+
+@app.route("/")
+def home():
+    return render_template("home_pixijs.html")
 
 
 # 接收 LINE 的資訊
@@ -57,7 +64,7 @@ def pixabay_isch(event):
             for match in re.finditer(pattern, str(conn.read())):
                 img_list.append(match.group()[12:-3])
                 
-            random_img_url = img_list[random.randint(0, len(img_list)+1)]
+            random_img_url = random.choice(img_list)
             print('fetch img url finish')
             print(random_img_url)
             
@@ -68,13 +75,12 @@ def pixabay_isch(event):
                     preview_image_url=random_img_url
                 )
             )
-        # 找不到圖就學說話
+        # 找不到圖就告訴我 user_id
         except:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=event.message.text)
+                TextSendMessage(text=str(event.source.user_id))
             )
-            pass
 
 if __name__ == "__main__":
     app.run()
