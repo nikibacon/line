@@ -1,3 +1,6 @@
+﻿from __future__ import unicode_literals
+import os
+
 from flask import Flask, request, abort
 
 from linebot import (
@@ -14,12 +17,12 @@ import configparser
 
 app = Flask(__name__)
 
+# LINE 聊天機器人的基本資料
 config = configparser.ConfigParser()
 config.read('config.ini')
 
 line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
-
 
 @app.route("/callback", methods=['POST'])
 def callback():
