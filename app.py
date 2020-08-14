@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage, FlexSendMessage
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage, FlexSendMessage, ImageSendMessage
 )
 
 import configparser
