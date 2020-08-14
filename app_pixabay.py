@@ -43,27 +43,62 @@ def callback():
 
     return 'OK'
 
-# 請 pixabay 幫我們找圖
-@handler.add(MessageEvent, message=TextMessage)
-def pixabay_isch(event):
+# # 請 pixabay 幫我們找圖
+# @handler.add(MessageEvent, message=TextMessage)
+# def pixabay_isch(event):
     
-# 先找圖
+# # 先找圖
+#         try:
+#             url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q':event.message.text})[2:]}/"
+#             headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
+            
+#             req = urllib.request.Request(url, headers = headers)
+#             conn = urllib.request.urlopen(req)
+            
+#             print('fetch page finish')
+            
+#             pattern = 'img srcset="\S*\s\w*,'
+#             img_list = []
+            
+#             for match in re.finditer(pattern, str(conn.read())):
+#                 img_list.append(match.group()[12:-3])
+                
+#             random_img_url = random.choice(img_list)
+#             print('fetch img url finish')
+#             print(random_img_url)
+            
+#             line_bot_api.reply_message(
+#                 event.reply_token,
+#                 ImageSendMessage(
+#                     original_content_url=random_img_url,
+#                     preview_image_url=random_img_url
+#                 )
+#             )
+
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def google_isch(event):
+    
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        # 先找圖
         try:
-            url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q':event.message.text})[2:]}/"
-            headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)  Chrome/84.0.4147.105 Safari/537.36'}
+            q_string = {'tbm': 'isch', 'q': event.message.text}
+            url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
+            headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
             
             req = urllib.request.Request(url, headers = headers)
             conn = urllib.request.urlopen(req)
             
-            print('fetch page finish')
+            print('fetch conn finish')
             
-            pattern = 'img srcset="\S*\s\w*,'
+            pattern = 'img data-src="\S*"'
             img_list = []
             
             for match in re.finditer(pattern, str(conn.read())):
-                img_list.append(match.group()[12:-3])
+                img_list.append(match.group()[14:-1])
                 
-            random_img_url = random.choice(img_list)
+            random_img_url = img_list[random.randint(0, len(img_list)+1)]
             print('fetch img url finish')
             print(random_img_url)
             
@@ -76,9 +111,35 @@ def pixabay_isch(event):
             )
         # 找不到圖就告訴我 user_id
         except:
+                msg = event.message.text
+                r = '我看不懂你說什麼'
+
+                if '貼圖' in msg:
+                    sticker_message = StickerSendMessage(
+                    package_id='1',
+                    sticker_id='1'
+                )
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        sticker_message)
+                    return
+
+
+                if msg in ['hi', 'Hi']:
+                    r = 'hi'
+                elif msg == '你吃飯了嗎':
+                    r = '還沒'
+                elif msg == '你是誰':
+                    r = '我是機器人'
+                elif '訂位' in msg:
+                    r = '你想訂位,是嗎?'
+                elif 'id' in msg:
+                    r = str(event.source.user_id)
+
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=str(event.source.user_id))
+                TextSendMessage(text=r)
+
             )
 
 if __name__ == "__main__":
