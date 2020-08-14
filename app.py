@@ -73,6 +73,10 @@ def callback():
 #     elif '訂位' in msg:
 #         r = '你想訂位,是嗎?'
 
+ # line_bot_api.reply_message(
+ #        event.reply_token,
+ #        TextSendMessage(text=r))
+
 
 # 請 pixabay 幫我們找圖
 @handler.add(MessageEvent, message=TextMessage)
@@ -115,10 +119,7 @@ def pixabay_isch(event):
             pass
 
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=r))
-
+   
 
 
 if __name__ == "__main__":
