@@ -47,53 +47,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def google_isch(event):
-    
+    msg = event.message.text
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-        # 先找圖
-        try:
-            q_string = {'tbm': 'isch', 'q': event.message.text}
-            url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
-            headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
-            
-            req = urllib.request.Request(url, headers = headers)
-            conn = urllib.request.urlopen(req)
-            
-            print('fetch conn finish')
-            
-            pattern = 'img data-src="\S*"'
-            img_list = []
-            
-            for match in re.finditer(pattern, str(conn.read())):
-                img_list.append(match.group()[14:-1])
-                
-            random_img_url = img_list[random.randint(0, len(img_list)+1)]
-            print('fetch img url finish')
-            print(random_img_url)
-            
-            line_bot_api.reply_message(
-                event.reply_token,
-                ImageSendMessage(
-                    original_content_url=random_img_url,
-                    preview_image_url=random_img_url
-                )
-            )
-        # 找不到圖就告訴我 user_id
-        except:
-                msg = event.message.text
-                r = '我看不懂你說什麼啦(嘟'
-
-                # if '貼圖' in msg:
-                #     sticker_message = StickerSendMessage(
-                #     package_id=f'{str(random.randint(1, 3))}',
-                #     sticker_id=f'{str(random.randint(1, 250))}'
-                # )
-                #     line_bot_api.reply_message(
-                #         event.reply_token,
-                #         sticker_message)
-                #     return
-
-
-                if msg in ['hi', 'Hi', '嗨']:
+        if msg in ['hi', 'Hi', '嗨']:
                     r = 'hi,最近過得如何?'
                 elif '吃飯了嗎' in msg:
                     r = '還沒, 你勒?'
@@ -102,29 +58,75 @@ def google_isch(event):
                 elif '訂位' in msg:
                     r = '你想訂位,是嗎?'
                 elif 'id' in msg:
-                    r = str(event.source.user_id)
+                    r = '這是你的line ID:', str(event.source.user_id)
 
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=r)
-
+                    )
+        else:
+        # 找圖
+            try:
+                q_string = {'tbm': 'isch', 'q': event.message.text}
+                url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
+                headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
+                
+                req = urllib.request.Request(url, headers = headers)
+                conn = urllib.request.urlopen(req)
+                
+                print('fetch conn finish')
+                
+                pattern = 'img data-src="\S*"'
+                img_list = []
+                
+                for match in re.finditer(pattern, str(conn.read())):
+                    img_list.append(match.group()[14:-1])
+                    
+                random_img_url = img_list[random.randint(0, len(img_list)+1)]
+                print('fetch img url finish')
+                print(random_img_url)
+                
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    ImageSendMessage(
+                        original_content_url=random_img_url,
+                        preview_image_url=random_img_url
+                    )
                 )
+            # 找不到圖就告訴我 user_id
+            except:
+                    
+                    r = '我看不懂你在說什麼啦(嘟'
+
+                    # if '貼圖' in msg:
+                    #     sticker_message = StickerSendMessage(
+                    #     package_id=f'{str(random.randint(1, 3))}',
+                    #     sticker_id=f'{str(random.randint(1, 250))}'
+                    # )
+                    #     line_bot_api.reply_message(
+                    #         event.reply_token,
+                    #         sticker_message)
+                    #     return
+                   
+
+                    
 
 
 
 @handler.add(MessageEvent, message=StickerMessage)
 def sticker_reply(event):
 
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
 
-    sticker_message = StickerSendMessage(
-    package_id = f'{str(random.randint(1, 2))}',
-    sticker_id = f'{str(random.randint(1, 120))}'
-    )
+        sticker_message = StickerSendMessage(
+        package_id = f'{str(random.randint(1, 2))}',
+        sticker_id = f'{str(random.randint(1, 120))}'
+        )
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        sticker_message
-    )
+        line_bot_api.reply_message(
+            event.reply_token,
+            sticker_message
+        )
 
 
 if __name__ == "__main__":
