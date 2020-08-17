@@ -82,23 +82,23 @@ def google_isch(event):
                 msg = event.message.text
                 r = '我看不懂你說什麼啦(嘟'
 
-                if '貼圖' in msg:
-                    sticker_message = StickerSendMessage(
-                    package_id=f'{str(random.randint(1, 3))}',
-                    sticker_id=f'{str(random.randint(1, 250))}'
-                )
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        sticker_message)
-                    return
+                # if '貼圖' in msg:
+                #     sticker_message = StickerSendMessage(
+                #     package_id=f'{str(random.randint(1, 3))}',
+                #     sticker_id=f'{str(random.randint(1, 250))}'
+                # )
+                #     line_bot_api.reply_message(
+                #         event.reply_token,
+                #         sticker_message)
+                #     return
 
 
-                if msg in ['hi', 'Hi']:
-                    r = 'hi'
-                elif msg == '你吃飯了嗎':
-                    r = '還沒'
-                elif msg == '你是誰':
-                    r = '我是機器人'
+                if msg in ['hi', 'Hi', '嗨']:
+                    r = 'hi,最近過得如何?'
+                elif '吃飯了嗎' in msg:
+                    r = '還沒, 你勒?'
+                elif '你是誰' in msg:
+                    r = '我是你的機器人好朋友'
                 elif '訂位' in msg:
                     r = '你想訂位,是嗎?'
                 elif 'id' in msg:
@@ -115,8 +115,9 @@ def google_isch(event):
 @handler.add(MessageEvent, message=StickerMessage)
 def sticker_reply(event):
     sticker_message = StickerSendMessage(
-    package_id='1',
-    sticker_id='1')
+    package_id = f'{str(random.randint(1, 2))}',
+    sticker_id = f'{str(random.randint(1, 400))}'
+    )
 
     line_bot_api.reply_message(
         event.reply_token,
