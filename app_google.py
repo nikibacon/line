@@ -114,9 +114,11 @@ def google_isch(event):
 
 @handler.add(MessageEvent, message=StickerMessage)
 def sticker_reply(event):
+
+
     sticker_message = StickerSendMessage(
     package_id = f'{str(random.randint(1, 2))}',
-    sticker_id = f'{str(random.randint(1, 400))}'
+    sticker_id = f'{str(random.randint(1, 120))}'
     )
 
     line_bot_api.reply_message(
