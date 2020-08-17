@@ -139,8 +139,8 @@ def sticker_reply(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
 
         sticker_message = StickerSendMessage(
-        package_id = f'{str(random.randint(1, 2))}',
-        sticker_id = f'{str(random.randint(1, 120))}'
+        package_id = '1',
+        sticker_id = f'{str(random.randint(401, 430))}'
         )
 
         line_bot_api.reply_message(
