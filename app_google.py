@@ -225,6 +225,18 @@ def makerailfall(station):
         return "沒有這個測站啦"
 
 
+def waterlevel():
+    
+
+    for i in range(1, 7):
+        r = requests.get('http://59.127.202.74:8080/challenger/getval.jsp?sql=' + str(i) + '@Currenty_Display_Hi')
+
+        msg += '台西'+ str(i) + '號水位:' + r.text + '%\n'
+
+    return msg
+    
+
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -247,6 +259,13 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=railfallmsg))
+    if cmd[0] == '水位':
+        waterlevelmsg = waterlevel()
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=waterlevelmsg))   
+
 
 
 if __name__ == "__main__":
