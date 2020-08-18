@@ -187,7 +187,7 @@ def makeaqi(station):
         return aqimsg
 
 def makeweather(station):
-    weatherdata = GetWeather(station)
+    weatherdata = getweather(station)
     if weatherdata == "not found":
         return False
 
