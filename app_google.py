@@ -227,7 +227,7 @@ def makerailfall(station):
 
 def waterlevel():
     
-
+    msg = ''
     for i in range(1, 7):
         r = requests.get('http://59.127.202.74:8080/challenger/getval.jsp?sql=' + str(i) + '@Currenty_Display_Hi')
 
