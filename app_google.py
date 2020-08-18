@@ -52,76 +52,76 @@ def callback():
 # @handler.add(MessageEvent, message=TextMessage)
 # def google_isch(event):
     
-#     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-#         msg = event.message.text
-#         if msg in ['hi', 'Hi', '嗨']:
-#             r = 'hi,最近過得如何?'
-#             line_bot_api.reply_message(
-#             event.reply_token,
-#             TextSendMessage(text=r)
-#             )
-#         elif '吃飯了嗎' in msg:
-#             r = '還沒, 你勒?'
-#             line_bot_api.reply_message(
-#             event.reply_token,
-#             TextSendMessage(text=r)
-#             )
-#         elif '你是誰' in msg:
-#             r = '我是你的機器人好朋友'
-#             line_bot_api.reply_message(
-#             event.reply_token,
-#             TextSendMessage(text=r)
-#             )
-#         elif '訂位' in msg:
-#             r = '你想訂位,是嗎?'
-#             line_bot_api.reply_message(
-#             event.reply_token,
-#             TextSendMessage(text=r)
-#             )
-#         elif 'id' in msg:
-#             r = '這是你的line ID:', str(event.source.user_id)
-#             line_bot_api.reply_message(
-#             event.reply_token,
-#             TextSendMessage(text=r)
-#             )
-#         else:
+    # if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+    #     msg = event.message.text
+    #     if msg in ['hi', 'Hi', '嗨']:
+    #         r = 'hi,最近過得如何?'
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=r)
+    #         )
+    #     elif '吃飯了嗎' in msg:
+    #         r = '還沒, 你勒?'
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=r)
+    #         )
+    #     elif '你是誰' in msg:
+    #         r = '我是你的機器人好朋友'
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=r)
+    #         )
+    #     elif '訂位' in msg:
+    #         r = '你想訂位,是嗎?'
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=r)
+    #         )
+    #     elif 'id' in msg:
+    #         r = '這是你的line ID:', str(event.source.user_id)
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=r)
+    #         )
+    #     else:
 
-#         # 找圖
-#             try:
-#                 q_string = {'tbm': 'isch', 'q': event.message.text}
-#                 url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
-#                 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
+    #     # 找圖
+    #         try:
+    #             q_string = {'tbm': 'isch', 'q': event.message.text}
+    #             url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
+    #             headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
                     
-#                 req = urllib.request.Request(url, headers = headers)
-#                 conn = urllib.request.urlopen(req)
+    #             req = urllib.request.Request(url, headers = headers)
+    #             conn = urllib.request.urlopen(req)
                 
-#                 print('fetch conn finish')
+    #             print('fetch conn finish')
                     
-#                 pattern = 'img data-src="\S*"'
-#                 img_list = []
+    #             pattern = 'img data-src="\S*"'
+    #             img_list = []
                     
-#                 for match in re.finditer(pattern, str(conn.read())):
-#                     img_list.append(match.group()[14:-1])
+    #             for match in re.finditer(pattern, str(conn.read())):
+    #                 img_list.append(match.group()[14:-1])
                         
-#                 random_img_url = img_list[random.randint(0, len(img_list)+1)]
-#                 print('fetch img url finish')
-#                 print(random_img_url)
+    #             random_img_url = img_list[random.randint(0, len(img_list)+1)]
+    #             print('fetch img url finish')
+    #             print(random_img_url)
                             
-#                 line_bot_api.reply_message(
-#                     event.reply_token,
-#                     ImageSendMessage(
-#                         original_content_url=random_img_url,
-#                         preview_image_url=random_img_url
-#                     )
-#                 )
-#                 # 找不到圖就告訴我 user_id
-#             except:
+    #             line_bot_api.reply_message(
+    #                 event.reply_token,
+    #                 ImageSendMessage(
+    #                     original_content_url=random_img_url,
+    #                     preview_image_url=random_img_url
+    #                 )
+    #             )
+    #             # 找不到圖就告訴我 user_id
+    #         except:
                         
-#                 r = '我看不懂你在說什麼啦(嘟'
-#                 line_bot_api.reply_message(
-#                 event.reply_token,
-#                 TextSendMessage(text=r)
-#                 )
+    #             r = '我看不懂你在說什麼啦(嘟'
+    #             line_bot_api.reply_message(
+    #             event.reply_token,
+    #             TextSendMessage(text=r)
+    #             )
                     # if '貼圖' in msg:
                     #     sticker_message = StickerSendMessage(
                     #     package_id=f'{str(random.randint(1, 3))}',
@@ -240,31 +240,100 @@ def waterlevel():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    cmd = event.message.text.split(" ")
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        cmd = event.message.text.split(" ")
+        msg = event.message.text
+        if cmd[0] == "天氣":
+            station = cmd[1]
+            weathermsg = makeweather(station)
 
-    if cmd[0] == "天氣":
-        station = cmd[1]
-        weathermsg = makeweather(station)
+            if not weathermsg:
+                weathermsg = "沒這個氣象站啦"
 
-        if not weathermsg:
-            weathermsg = "沒這個氣象站啦"
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=weathermsg))
+        if cmd[0] == "雨量":
+            station = cmd[1]
+            railfallmsg = makerailfall(station)
 
-        line_bot_api.reply_message(
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=railfallmsg))
+        if cmd[0] == '水位':
+            waterlevelmsg = waterlevel()
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=waterlevelmsg))   
+        if msg in ['hi', 'Hi', '嗨']:
+            r = 'hi,最近過得如何?'
+            line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=weathermsg))
-    if cmd[0] == "雨量":
-        station = cmd[1]
-        railfallmsg = makerailfall(station)
-
-        line_bot_api.reply_message(
+            TextSendMessage(text=r)
+            )
+        elif '吃飯了嗎' in msg:
+            r = '還沒, 你勒?'
+            line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=railfallmsg))
-    if cmd[0] == '水位':
-        waterlevelmsg = waterlevel()
-
-        line_bot_api.reply_message(
+            TextSendMessage(text=r)
+            )
+        elif '你是誰' in msg:
+            r = '我是你的機器人好朋友'
+            line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=waterlevelmsg))   
+            TextSendMessage(text=r)
+            )
+        elif '訂位' in msg:
+            r = '你想訂位,是嗎?'
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=r)
+            )
+        elif 'id' in msg:
+            r = '這是你的line ID:', str(event.source.user_id)
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=r)
+            )
+        else:
+
+        # 找圖
+            try:
+                q_string = {'tbm': 'isch', 'q': event.message.text}
+                url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
+                headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
+                    
+                req = urllib.request.Request(url, headers = headers)
+                conn = urllib.request.urlopen(req)
+                
+                print('fetch conn finish')
+                    
+                pattern = 'img data-src="\S*"'
+                img_list = []
+                    
+                for match in re.finditer(pattern, str(conn.read())):
+                    img_list.append(match.group()[14:-1])
+                        
+                random_img_url = img_list[random.randint(0, len(img_list)+1)]
+                print('fetch img url finish')
+                print(random_img_url)
+                            
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    ImageSendMessage(
+                        original_content_url=random_img_url,
+                        preview_image_url=random_img_url
+                    )
+                )
+                # 找不到圖就告訴我 user_id
+            except:
+                        
+                r = '我看不懂你在說什麼啦(嘟'
+                line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=r)
+                )
 
 
 
