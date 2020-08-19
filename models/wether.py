@@ -114,40 +114,40 @@ def weather_message(event):
     
     cmd = event.message.text.split(" ")
     
-        if cmd[0] == "天氣":
-            station = cmd[1]
-            weathermsg = makeweather(station)
+    if cmd[0] == "天氣":
+        station = cmd[1]
+        weathermsg = makeweather(station)
 
-            if not weathermsg:
-                weathermsg = "沒這個氣象站啦"
+        if not weathermsg:
+            weathermsg = "沒這個氣象站啦"
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=weathermsg))
-                return True
-        else:
-            return False 
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=weathermsg))
+            return True
+    else:
+        return False 
 
-        if cmd[0] == "雨量":
-            station = cmd[1]
-            railfallmsg = makerailfall(station)
+    if cmd[0] == "雨量":
+        station = cmd[1]
+        railfallmsg = makerailfall(station)
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=railfallmsg))
-                return True
-        else:
-            return False
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=railfallmsg))
+            return True
+    else:
+        return False
 
-        if cmd[0] == '水位':
-            waterlevelmsg = waterlevel()
+    if cmd[0] == '水位':
+        waterlevelmsg = waterlevel()
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=waterlevelmsg))
-                return True
-        else:
-            return False
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=waterlevelmsg))
+            return True
+    else:
+        return False
         
     
 
