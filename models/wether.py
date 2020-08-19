@@ -125,10 +125,7 @@ def weather_message(event):
             event.reply_token,
             TextSendMessage(text=weathermsg))
         return True
-    else:
-        return False 
-
-    if cmd[0] == "雨量":
+    elif cmd[0] == "雨量":        
         station = cmd[1]
         railfallmsg = makerailfall(station)
 
@@ -136,10 +133,7 @@ def weather_message(event):
             event.reply_token,
             TextSendMessage(text=railfallmsg))
         return True
-    else:
-        return False
-
-    if cmd[0] == '水位':
+    elif cmd[0] == '水位':
         waterlevelmsg = waterlevel()
 
         line_bot_api.reply_message(
