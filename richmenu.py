@@ -34,31 +34,31 @@ body = {
     "size": {"width": 2500, "height": 1686},
     "selected": "true",
     "name": "Controller",
-    "chatBarText": "Controller",
+    "chatBarText": "選擇項目",
     "areas":[
         {
           "bounds": {"x": 551, "y": 325, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "up"}
+          "action": {"type": "message", "text": "吃飽了嗎"}
         },
         {
           "bounds": {"x": 876, "y": 651, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "right"}
+          "action": {"type": "message", "text": "天氣 左營"}
         },
         {
           "bounds": {"x": 551, "y": 972, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "down"}
+          "action": {"type": "message", "text": "d雨量 左營"}
         },
         {
           "bounds": {"x": 225, "y": 651, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "left"}
+          "action": {"type": "message", "text": "id"}
         },
         {
           "bounds": {"x": 1433, "y": 657, "width": 367, "height": 367},
-          "action": {"type": "message", "text": "btn b"}
+          "action": {"type": "message", "text": "水位"}
         },
         {
           "bounds": {"x": 1907, "y": 657, "width": 367, "height": 367},
-          "action": {"type": "message", "text": "btn a"}
+          "action": {"type": "message", "text": "hi"}
         }
     ]
   }
@@ -83,7 +83,7 @@ for file in os.listdir('img'):
         req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/' + idlist[count], 
                        headers=headers)
 
-        print(idlist[count], "count = ", count )    
+        print(idlist[count], "count = ", count, 'filename = ', file )    
         count += 1
 
 
