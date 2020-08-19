@@ -90,8 +90,10 @@ req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu',
 print(req.text)
 
 
-with open("control.jpg", 'rb') as f:
-    line_bot_api.set_rich_menu_image("richmenu-c0171d9ce96960d99989ddf29887b7ea", "image/jpeg", f)
+for file in os.listdir('img'):  
+    if file.endswith('.jpg'):
+        with open(os.path.join('img', file), 'rb') as f:
+            line_bot_api.set_rich_menu_image("richmenu-c0171d9ce96960d99989ddf29887b7ea", "image/jpeg", f)
 
 req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/richmenu-c0171d9ce96960d99989ddf29887b7ea', 
                        headers=headers)
