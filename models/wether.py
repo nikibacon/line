@@ -124,7 +124,7 @@ def weather_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=weathermsg))
-            return True
+        return True
     else:
         return False 
 
@@ -135,7 +135,7 @@ def weather_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=railfallmsg))
-            return True
+        return True
     else:
         return False
 
@@ -145,7 +145,7 @@ def weather_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=waterlevelmsg))
-            return True
+        return True
     else:
         return False
         
