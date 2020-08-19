@@ -17,7 +17,7 @@ import random
 import requests
 import json
 
-from models import reply, googleimg, wether
+from models import replymsg, googleimg, wether
 
 app = Flask(__name__)
 
@@ -134,7 +134,7 @@ def reply_text_message(event):
             reply = wether.weather_message(event)
 
         if not reply:
-            reply = reply.hi_message(event)
+            reply = replymsg.hi_message(event)
 
         if not reply:
             reply = googleimg.google_img(event)
