@@ -79,11 +79,13 @@ for file in os.listdir('img'):
         
         with open(os.path.join('img', file), 'rb') as f:
             line_bot_api.set_rich_menu_image(idlist[count], "image/jpeg", f)
+
+        req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/' + idlist[count], 
+                       headers=headers)
+
         print(idlist[count], "count = ", count )    
         count += 1
 
 
-req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/richmenu-c0171d9ce96960d99989ddf29887b7ea', 
-                       headers=headers)
 
 print(req.text)
