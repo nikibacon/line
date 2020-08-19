@@ -30,22 +30,20 @@ line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 
 def sticker_reply(event):
 
-    try:
 
-        sticker_message = StickerSendMessage(
-        package_id = '1',
-        sticker_id = f'{str(random.randint(401, 430))}'
-        )
+    sticker_message = StickerSendMessage(
+    package_id = '1',
+    sticker_id = f'{str(random.randint(401, 430))}'
+    )
 
-        line_bot_api.reply_message(
-            event.reply_token,
-            sticker_message
-        )
+    line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message
+    )
 
-        return True
+    return True
     
-    except:
-        return False
+ 
 
 
 
