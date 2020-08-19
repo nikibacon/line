@@ -30,7 +30,6 @@ line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 
 def sticker_reply(event):
 
-
     sticker_message = StickerSendMessage(
     package_id = '1',
     sticker_id = f'{str(random.randint(401, 430))}'
@@ -41,6 +40,7 @@ def sticker_reply(event):
         sticker_message
     )
 
+   
     return True
     
  

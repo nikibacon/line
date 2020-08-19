@@ -108,11 +108,15 @@ def reply_sticekr_message(event):
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
 
-        reply = False
+        sticker_message = StickerSendMessage(
+            package_id = '1',
+            sticker_id = f'{str(random.randint(401, 430))}'
+        )
 
-        #回貼圖
-        if not reply:
-            reply = reply.sticker_reply(event)
+        line_bot_api.reply_message(
+            event.reply_token,
+            sticker_message
+        )
 
 
     
