@@ -53,39 +53,42 @@ def hi_message(event):
 
     msg = event.message.text
 
-    try:
-        if msg in ['hi', 'Hi', '嗨']:
-            r = 'hi,最近過得如何?'
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=r)
-            )
-        elif '吃飯了嗎' in msg:
-            r = '還沒, 你勒?'
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=r)
-            )
-        elif '你是誰' in msg:
-            r = '我是你的機器人好朋友'
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=r)
-            )
-        elif '訂位' in msg:
-            r = '你想訂位,是嗎?'
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=r)
-            )
-        elif 'id' in msg:
-            r = '這是你的line ID:', str(event.source.user_id)
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=r)
-            )
     
+    if msg in ['hi', 'Hi', '嗨']:
+        r = 'hi,最近過得如何?'
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=r)
+        )
         return True
-    
-    except:
+    elif '吃飯了嗎' in msg:
+        r = '還沒, 你勒?'
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=r)
+        )
+        return True
+    elif '你是誰' in msg:
+        r = '我是你的機器人好朋友'
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=r)
+        )
+        return True
+    elif '訂位' in msg:
+        r = '你想訂位,是嗎?'
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=r)
+        )
+        return True
+    elif 'id' in msg:
+        r = '這是你的line ID:', str(event.source.user_id)
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=r)
+        )
+
+        return True
+    else:
         return False
