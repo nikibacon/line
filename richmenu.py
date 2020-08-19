@@ -46,7 +46,7 @@ body = {
         },
         {
           "bounds": {"x": 551, "y": 972, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "d雨量 左營"}
+          "action": {"type": "message", "text": "雨量 左營"}
         },
         {
           "bounds": {"x": 225, "y": 651, "width": 321, "height": 321},
