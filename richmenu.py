@@ -37,55 +37,72 @@ body = {
     "chatBarText": "選擇項目",
     "areas":[
         {
-          "bounds": {"x": 551, "y": 325, "width": 321, "height": 321},
+          "bounds": {"x": 0, "y": 0, "width": 833, "height": 843},
           "action": {"type": "message", "text": "吃飽了嗎"}
         },
         {
-          "bounds": {"x": 876, "y": 651, "width": 321, "height": 321},
+          "bounds": {"x": 833, "y": 0, "width": 833, "height": 843},
           "action": {"type": "message", "text": "天氣 左營"}
         },
         {
-          "bounds": {"x": 551, "y": 972, "width": 321, "height": 321},
+          "bounds": {"x": 1666, "y": 0, "width": 833, "height": 843},
           "action": {"type": "message", "text": "雨量 左營"}
         },
         {
-          "bounds": {"x": 225, "y": 651, "width": 321, "height": 321},
+          "bounds": {"x": 0, "y": 843, "width": 833, "height": 843},
           "action": {"type": "message", "text": "id"}
         },
         {
-          "bounds": {"x": 1433, "y": 657, "width": 367, "height": 367},
+          "bounds": {"x": 833, "y": 843, "width": 833, "height": 843},
           "action": {"type": "message", "text": "水位"}
         },
         {
-          "bounds": {"x": 1907, "y": 657, "width": 367, "height": 367},
+          "bounds": {"x": 1666, "y": 843, "width": 833, "height": 843},
           "action": {"type": "message", "text": "hi"}
         }
     ]
   }
 
-
 idlist=[]
-count = 0 
-
-for file in os.listdir('img'):  
-    if file.endswith('.jpg'):
-        req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu', 
+req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu', 
                            headers=headers,data=json.dumps(body).encode('utf-8'))
 
-        r = req.text.split(':')
-        r = r[1].split('"')
-        idlist.append(r[1])        
+r = req.text.split(':')
+r = r[1].split('"')
+idlist.append(r[1])
+
+with open(os.path.join('img', 'testjpg.jpg'), 'rb') as f:
+    line_bot_api.set_rich_menu_image(idlist[0], "image/jpeg", f)
+
+req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/' + idlist[0], 
+                        headers=headers)
+
+print(idlist[0], 'count = 0, filename = testjpg.jpg') 
+print(req.text)
+
+
+# idlist=[]
+# count = 0 
+
+# for file in os.listdir('img'):  
+#     if file.endswith('.jpg'):
+#         req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu', 
+#                            headers=headers,data=json.dumps(body).encode('utf-8'))
+
+#         r = req.text.split(':')
+#         r = r[1].split('"')
+#         idlist.append(r[1])        
        
         
-        with open(os.path.join('img', file), 'rb') as f:
-            line_bot_api.set_rich_menu_image(idlist[count], "image/jpeg", f)
+#         with open(os.path.join('img', file), 'rb') as f:
+#             line_bot_api.set_rich_menu_image(idlist[count], "image/jpeg", f)
 
-        req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/' + idlist[count], 
-                       headers=headers)
+#         req = requests.request('POST', 'https://api.line.me/v2/bot/user/all/richmenu/' + idlist[count], 
+#                        headers=headers)
 
-        print(idlist[count], "count = ", count, 'filename = ', file )    
-        count += 1
+#         print(idlist[count], "count = ", count, 'filename = ', file )    
+#         count += 1
 
 
 
-print(req.text)
+# print(req.text)
