@@ -64,7 +64,7 @@ def hi_message(event):
         )
         return True
     elif 'id' in msg:
-        r = '這是你的line ID:', str(event.source.user_id)
+        r = '這是你的line ID:' + str(event.source.user_id)
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=r)
